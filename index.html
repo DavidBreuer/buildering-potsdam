@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Buildering Spots Potsdam</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <style>
+    #map{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #btns{
+        position: fixed;
+        left: 15%;
+        top: 2%;
+        z-index: 9999;
+    }
+    button {
+        border: 1px solid black;
+        background: white;
+        border-radius: 2px;
+        font-size: 20px;
+        font-weight: normal;
+    }
+    .leaflet-popup-tip {
+      display: None;
+    }
+    img:hover {
+      transform: scale(2.3);
+      z-index: 99999;
+    }
+
+    .huechange {
+        filter: hue-rotate(120deg);
+    }
+
+    </style>
+
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="btns">
+<button onclick="fprev()"> < </button>
+<button onclick="fnext()"> > </button>
+<button onclick="finfo()"> ? </button>
+</div>
+
+<img id="large" src="" />
+
+<script>
+
+	var map = L.map('map').setView([52.397587674154316, 13.050653733022815], 14);
+
+	var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18, // zoom in
+		minZoom: 12, // zoom out
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(map);
+
+    var markers = [];
+    var marker = L.marker([52.39586, 13.061183]).addTo(map).bindPopup("<b>(00) Alter Markt Obeliskensockel</b><br><img id='small' src='img/alter_obelisk.png' width='200'/><br><b>A)</b> Traverse, um den Sockel herum (beide Richtungen)<br><br><b>B)</b> An einer der vier Ecke ohne Hände bis zur Oberkante des Sockels");
+markers.push(marker);var marker = L.marker([52.396076, 13.061741]).addTo(map).bindPopup("<b>(01) Alter Markt Museum</b><br><img id='small' src='img/alter_museum.png' width='200'/><br><b>A)</b> Aus dem Stand an der Wand hoch. Schwere Variation aus dem Hängen an einer der unteren Kanten mit Hochstützen.<br><br><b>B)</b> Wand - Schild - Wand");
+markers.push(marker);var marker = L.marker([52.396226, 13.057546]).addTo(map).bindPopup("<b>(02) Neuer Markt Wand</b><br><img id='small' src='img/neuer_wand.png' width='200'/><br><b>A)</b> Traverse an der Wand mit Nutzung der horizontalen Fugen/Leisten (beide Richtungen)<br><br><b>B)</b> Wie A aber nur mit vertikalen Fugen/Leisten (beide Richtungen)");
+markers.push(marker);var marker = L.marker([52.396527, 13.057026]).addTo(map).bindPopup("<b>(03) Neuer Markt Fassade</b><br><img id='small' src='img/neuer_fassade.png' width='200'/><br><b>A)</b> Nach oben und Traverse<br><br><b>B)</b> Wie A und weiter um die Ecke");
+markers.push(marker);var marker = L.marker([52.397503, 13.055878]).addTo(map).bindPopup("<b>(04) Kanal Fussgängerbrücke</b><br><img id='small' src='img/kanal_bruecke.png' width='200'/><br><b>A)</b> Unten im Kanal starten und unter der Brücke durch hangeln und klettern<br><br><b>B)</b> Oben aus der Brücke starten und einmal drunter durch und oben wieder zurück<br><br><b>C)</b> An einer Außenseite der Brücke entlang, ohne dass Füße das Metall der Brücke berühren");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.397614, 13.055776]).addTo(map).bindPopup("<b>(05) Kanal Untergriff</b><br><img id='small' src='img/kanal_untergriff.png' width='200'/><br><b>A)</b> Aus dem Kanal nach oben klettern, Brücke kann mit genutzt werden<br><br><b>B)</b> Es wird nur die Kanalmauer (und das Kanalgeländer) genutzt<br><br><b>C)</b> Wie B, aber die Kanaloberkante wird nur als Untergriff genutzt");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.397882, 13.053673]).addTo(map).bindPopup("<b>(06) Kanal Treppenquerung</b><br><img id='small' src='img/kanal_treppe.png' width='200'/><br><b>A)</b> Start im Hängen auf einer Seite der Treffe, Sprung oder statisch auf die andere Seite kommen (beide Richtungen)");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.397827, 13.053555]).addTo(map).bindPopup("<b>(07) Kanal Wallruns</b><br><img id='small' src='img/kanal_wallruns.png' width='200'/><br><b>A)</b> Aus dem Laufen an die obere Kante des Kanals und rausklettern, links ist Mauer weniger hoch<br><br><b>B)</b> Wie A aber an höherer Stelle der Mauer weiter rechts");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.39783, 13.053474]).addTo(map).bindPopup("<b>(08) Kanal Anfangsmauer</b><br><img id='small' src='img/kanal_mauer.png' width='200'/><br><b>A)</b> Aus dem Sitzstart mit kleinem Vorsprung und Spalt aus dem Kanal heraus<br><br><b>B)</b> Wie A, aber noch eine schmale Absatzstufe weiter rechts hoch<br><br><b>C)</b> Sitzstart weiter am oberen Ende der Rampe und hoch");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.397823, 13.05363]).addTo(map).bindPopup("<b>(09) Kanal Ring und Reverse</b><br><img id='small' src='img/kanal_ring.png' width='200'/><br><b>A)</b> Am Ring hängen, Füße an der Mauer und hoch<br><br><b>B)</b> Startposition mit den Händen am Ring und den Füße oben an der Oberkante eingehakt, dann aus dem Kanal raus (nur mit Spotten/Hilfestellung, die einen ungeplanten Sturz abfangen können!) ");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.397244, 13.053539]).addTo(map).bindPopup("<b>(10) Kanal Glockenspiel</b><br><img id='small' src='img/kanal_glockenspiel.png' width='200'/><br><b>A)</b> Zwischen den Pfeilern verkeilen und hoch arbeiten (maximal 2-3 Meter)");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.393375, 13.059547]).addTo(map).bindPopup("<b>(11) Lustgarten Treppenpfeiler</b><br><img id='small' src='img/lustgarten_treppe.png' width='200'/><br><b>A)</b> An der Außenseite der Stufen hochhangeln oder klettern und oben übers Geländer<br><br><b>B)</b> An der Säule Koala-artig nach oben, um den Treffenabsatz herum und übers Geländer");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.393457, 13.059466]).addTo(map).bindPopup("<b>(12) Lustgarten Tor</b><br><img id='small' src='img/lustgarten_tor.png' width='200'/><br><b>A)</b> Linke Torseite nach oben, mit Wand, Türscharnieren und Torführungschiene<br><br><b>B)</b> Mitte des Tor nach oben, nur Torprofil und Führungsleiste (keine Klinken)<br><br><b>C)</b> Rechts Torseite nach oben, nur Türprofil und Scharniere und dann obere Steinkante und Geländer");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.393365, 13.059649]).addTo(map).bindPopup("<b>(13) Lustgarten Säulenumrundung</b><br><img id='small' src='img/lustgarten_saeule.png' width='200'/><br><b>A)</b> Aus dem Stand, zwischen Wand und Säule verkeilen und hinten rum klettern<br><br><b>B)</b> Start von der Kante, ohne Bodenberührung zur Säule, drum rum, zum Fenstersims und zurück zur Kante");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.394134, 13.061467]).addTo(map).bindPopup("<b>(14) Lange Brücke Starterplatte</b><br><img id='small' src='img/lange_platte.png' width='200'/><br><b>A)</b> Über Leiter-artigen Beton nach oben über Brückengeländer, alle Strukturen können genutzt werden<br><br><b>B)</b> Ausstieg rechts über Betonwand, es werden keine Brücken- oder Metallstrukturen genutzt");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.394125, 13.061065]).addTo(map).bindPopup("<b>(15) Lange Brücke Verschneidung</b><br><img id='small' src='img/lange_verschneidung.png' width='200'/><br><b>A)</b> Vom Boden mit Betonwand und Brückenelementen so weit klettern, dass das Geländer berührt werden kann<br><br><b>B)</b> Wie A und weiter oben raus klettern (Achtung, oben ist Verkehr!)");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.394092, 13.061162]).addTo(map).bindPopup("<b>(16) Lange Brücke Senkrechtstarter</b><br><img id='small' src='img/lange_senkrecht.png' width='200'/><br><b>A)</b> Start auf dem Boden, dann senkrecht hoch (Achtung, oben ist Verkehr! Nur mit erfahrenen Spottenden!)");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.393758, 13.061784]).addTo(map).bindPopup("<b>(17) Lange Brücke Bogenkletterei</b><br><img id='small' src='img/lange_bogen.png' width='200'/><br><b>A)</b> An einem der Betonsockel starten und über Land am Bogen entlang hangeln (Spotten!)<br><br><b>B)</b> Wie A, aber an längerem Bogen übers Wasser hangeln (Achtung, nur auf Boote fallen und Wasser ist nass)");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.392822, 13.063313]).addTo(map).bindPopup("<b>(18) Lange Brücke Highball</b><br><img id='small' src='img/lange_highball.png' width='200'/><br><b>A)</b> Traverse auf Leiter-artigem Betonprofil in geringer Höhe (beide Richtungen)<br><br><b>B)</b> Vom Boden bis zum ersten Metallträger<br><br><b>C)</b> Wie B und dann an Brückenseite weiter hoch und übers Geländer aussteigen (nur mit erfahrenen Kletternden und Spottenden)");
+marker._icon.classList.add('huechange');markers.push(marker);var marker = L.marker([52.39235, 13.062733]).addTo(map).bindPopup("<b>(19) Bastion Brücke</b><br><img id='small' src='img/bastion_bruecke.png' width='200'/><br><b>A)</b> An der Ecke hoch zur Unterkante der Brüstung<br><br><b>B)</b> Um die Ecke herum, ohne Backsteinwand, um die Kante und über Geländer (Achtung Verkehr)");
+markers.push(marker);var marker = L.marker([52.392354, 13.062556]).addTo(map).bindPopup("<b>(20) Bastion Brüstung</b><br><img id='small' src='img/bastion_bruestung.png' width='200'/><br><b>A)</b> Von Rasen an der Brüstung hoch und drüber<br><br><b>B)</b> Wie A aber ohne Hände bis auf dem runden Vorsprung der Brüstung");
+markers.push(marker);var marker = L.marker([52.392174, 13.062583]).addTo(map).bindPopup("<b>(21) Bastion Wand</b><br><img id='small' src='img/bastion_wand.png' width='200'/><br><b>A)</b> Die Wand hoch, in den Riss zwischen Wand und Decke/Fahrbahn, dann nach links hangeln und um die Ecke herum runterklettern");
+markers.push(marker);var marker = L.marker([52.400347, 13.061044]).addTo(map).bindPopup("<b>(22) Bassi-Haus</b><br><img id='small' src='img/bassi_haus.png' width='200'/><br><b>A)</b> Ums Haus (beide Richtungen)<br><br><b>B)</b> An der Türseite von einer Seite zur anderen, ohne die Tür oder die obere Kante unterhalb der Fenster zu nutzen (nur Wand)<br><br><b>C)</b> Aufs Haus (Vorsichtig mit weichem Dachmetall)");
+markers.push(marker);var marker = L.marker([52.400946, 13.073205]).addTo(map).bindPopup("<b>(23) Schiffbauergasse Humboldt</b><br><img id='small' src='img/schiff_humboldt.png' width='200'/><br><b>A)</b> Vom Gehweg unten mit Wallrun hoch zum Wartungsgang unter der Brücke (auf die andere Havelseite und zurück)");
+markers.push(marker);var marker = L.marker([52.40309, 13.074181]).addTo(map).bindPopup("<b>(24) Schiffbauergasse Offizze</b><br><img id='small' src='img/schiff_offizze.png' width='200'/><br><b>A)</b> Am Backsteinhaus zwischen Waschhaus und Fabrik entlang bis zur Ecke (beide Richtungen)<br><br><b>B)</b> Wie A und weiter bis zur Treppenkonstruktion");
+markers.push(marker);var marker = L.marker([52.403558, 13.072904]).addTo(map).bindPopup("<b>(25) Schiffbauergasse Reithalle</b><br><img id='small' src='img/schiff_reithalle.png' width='200'/><br><b>A)</b> Traverse an der Wand entlang (beide Richtungen)<br><br><b>B)</b> Bis auf die Fenstersimse hoch");
+markers.push(marker);var marker = L.marker([52.401692, 13.072641]).addTo(map).bindPopup("<b>(26) Schiffbauergasse Studio</b><br><img id='small' src='img/schiff_studio.png' width='200'/><br><b>A)</b> Von der Gebäudekante bis zur Torkante (beide Richtungen)");
+markers.push(marker);var marker = L.marker([52.402939, 13.074562]).addTo(map).bindPopup("<b>(27) Schiffbauergasse Theater</b><br><img id='small' src='img/schiff_theater.png' width='200'/><br><b>A)</b> An den Metalltrrägern nach oben (Achtung Höhe)");
+markers.push(marker);var marker = L.marker([52.403198, 13.072518]).addTo(map).bindPopup("<b>(28) Schiffbauergasse Villa</b><br><img id='small' src='img/schiff_villa.png' width='200'/><br><b>A)</b> Entlang der Wand, vorbei an den Fenstern<br><br><b>B)</b> Wie A und um die Ecke herum<br><br><b>C)</b> Wie B und wieder zurück");
+markers.push(marker);var marker = L.marker([52.404477, 13.044591]).addTo(map).bindPopup("<b>(29) Weinbergtreppenmauer</b><br><img id='small' src='img/weinberg_mauer.png' width='200'/><br><b>A)</b> Traverse an der Mauer (beide Richtungen)<br><br><b>B)</b> An der Mauer hoch und auf die andere Seite");
+markers.push(marker);var marker = L.marker([52.396049, 13.05003]).addTo(map).bindPopup("<b>(30) Breite Strasse Obelisk</b><br><img id='small' src='img/breite_obelisk.png' width='200'/><br><b>A)</b> Einmal um den Obelisk herum (beide Richtungen)<br><br><b>B)</b> An den Profilleisten bis zur Vorsprung<br><br><b>C)</b> Wie C und um den Vorsprung herum (nur mit erfahrenen Spottenden und Crashpad!)");
+markers.push(marker);var marker = L.marker([52.396121, 13.049124]).addTo(map).bindPopup("<b>(31) Breite Strasse Steinskulptur</b><br><img id='small' src='img/breite_skulptur.png' width='200'/><br><b>A)</b> An der Leiter-artigen Stirnseite nach oben<br><br><b>B)</b> Sitzstart auf der glatten Natursteinseite, glatte linke und Leiter-artige rechte Kante können mit genutzt werden<br><br><b>C)</b> Es wird nur die glatten Natursteinseite (und evtl. eine Kante) genutzt, Stehstart");
+markers.push(marker);var marker = L.marker([52.393018, 13.044462]).addTo(map).bindPopup("<b>(32) Havelbuchtbrücke unten drunter</b><br><img id='small' src='img/havelbucht_bruecke.png' width='200'/><br><b>A)</b> Vom Fußweg mit Wallrun zum Brückabsatz und an Havelbuchtseite unten an der Brücke entlang (nur mit Seepferdchen)<br><br><b>B)</b> Wie A, aber von oben zur Brückenseite runter klettern");
+markers.push(marker);var marker = L.marker([52.388248, 13.022323]).addTo(map).bindPopup("<b>(33) Platte Dach</b><br><img id='small' src='img/platte_dach.png' width='200'/><br><b>A)</b> Mit Mauerelementen auf das Dach des Häuschens<br><br><b>B)</b> Wie A aber ohne die Mauerelemente als Tritte zu nutzen<br><br><b>C)</b> Ohne Mauern zu nutzen aufs Dach kommen");
+markers.push(marker);var marker = L.marker([52.381638, 13.018777]).addTo(map).bindPopup("<b>(34) Sportschule Parkhaus</b><br><img id='small' src='img/sportschule_parkhaus.png' width='200'/><br><b>A)</b> Am Parkhaus mit den diagonalen Streben nach oben<br><br><b>B)</b> Wie A aber in einem Segment ohne diagonale Streben<br><br><b>C)</b> Wie B aber nur unter Nutzung der senkrechten Metallträger (mit Crashpad wegen höherer Abrutschchance)");
+markers.push(marker);var marker = L.marker([52.375095, 13.006278]).addTo(map).bindPopup("<b>(35) Pirschheide Straßenbrücke</b><br><img id='small' src='img/aaa_berge.jpg' width='200'/><br><b>A)</b> Unter Nutzung der Verschneidung nach oben und Ausstieg über Geländer (Achtung Bahnverkehr! Beide Staßenseiten, jeweils Seite ohne Regenrohr)<br><br><b>B)</b> Wie A, aber es wir nur die Brückenkante genutzt<br><br><b>C)</b> Wie A, aber es wir gar keine Kante und nur die flache Mauer genutzt (an einigen Stellen einfacher als an anderen, Suchaufgabe)<br><br><b>D)</b> Traverse in geringer bis moderater Höhe ohne obere Kante natürlich (in beide Richtungen, beide Straßenseiten)");
+markers.push(marker);var marker = L.marker([52.370123, 13.016165]).addTo(map).bindPopup("<b>(36) Pirschheide Havelbrücke</b><br><img id='small' src='img/pirschheide_havel.png' width='200'/><br><b>A)</b> An der Kante nach oben (Achtung, für den Ausstieg muss man über den Sockel hinaus an der Brücke nach oben aussteigen!)<br><br><b>B)</b> Andere Stellen an der geraden Wand finden und vertikal klettern<br><br><b>C)</b> Teilweise Traverse (beide Richtungen)");
+markers.push(marker);var marker = L.marker([52.409687, 13.018101]).addTo(map).bindPopup("<b>(37) Teufelsbrücke</b><br><img id='small' src='img/teufelbruecke_pfeiler.png' width='200'/><br><b>A)</b> An der Innenseite hoch (maximal bis Absprunghöhe, Achtung unebener Boden)<br><br><b>B)</b> An den Brückenansätzen, von einer auf die andere Seite (beide Seiten, beide Richtungen)<br><br><b>C)</b> Um alle Pfeiler herum (nicht auf Bild zu sehen, beide Richtungen, manche sind einfacher als andere)");
+markers.push(marker);var marker = L.marker([52.407511, 12.976436]).addTo(map).bindPopup("<b>(38) Golm Uni Kletteradler</b><br><img id='small' src='img/aaa_berge.jpg' width='200'/><br><b>A)</b> Im überhängenden rechten Flügel hoch und oben aussteigen<br><br><b>B)</b> Im überhängenden linken Flügel hoch und oben aussteigen<br><br><b>C)</b> Einmal um den mittleren Schnabelteil herum, ohne Bodenberührung oder Seilnutzung");
+markers.push(marker);var marker = L.marker([52.417053, 13.049741]).addTo(map).bindPopup("<b>(39) Buga-Park Bouldersichel</b><br><img id='small' src='img/aaa_berge.jpg' width='200'/><br><b>A)</b> Vom Kies im flachen Bereich der Sichel nach oben raus (z.B. weit rechts oder durchs Fensterloch)<br><br><b>B)</b> Vom Kies im höheren Bereich der Sichel nach oben raus (mit Spotten/Hilfestellung)<br><br><b>C)</b> Traverse um die Sichel (beide Richtungen)");
+markers.push(marker);var marker = L.marker([52.418761, 13.053432]).addTo(map).bindPopup("<b>(40) Buga-Park Rutschenturm</b><br><img id='small' src='img/aaa_berge.jpg' width='200'/><br><b>A)</b> Von der Treffe starten, unterm Netz entlang bis zu den Kletterrouten<br><br><b>B)</b> Kletterrouten mit selbst-definierten Griffen und Tritten bis Absprunghöhe");
+markers.push(marker);var marker = L.marker([52.4209755535962, 13.0466508865356]).addTo(map).bindPopup("<b>(41) Buga-Park Café</b><br><img id='small' src='img/aaa_berge.jpg' width='200'/><br><b>A)</b> Traverse<br><br><b>B)</b> Nach oben");
+markers.push(marker);var marker = L.marker([52.389705, 13.036829]).addTo(map).bindPopup("<b>(42) Westufer Bogen</b><br><img id='small' src='img/westufer_bogen.png' width='200'/><br><b>A)</b> Um das sanft abfallende Bogenende horizontal herum klettern (beide Richtungen)<br><br><b>B)</b> Um das steil abfallende Bogenende horizontal herum klettern (beide Richtungen)<br><br><b>C)</b> Den Bogen von einem zum anderen Ende entlang (oben drauf oder unten drunter)");
+markers.push(marker);var marker = L.marker([52.38981, 13.035042]).addTo(map).bindPopup("<b>(43) Westufer Brücke</b><br><img id='small' src='img/westufer_bruecke.png' width='200'/><br><b>A)</b> Vom Ufer, unter der Brücke, übers Wasser, an der Seite und übers Geländer aussteigen<br><br><b>B)</b> Wie A aber unter der ganzen Brücke entlang");
+markers.push(marker);var marker = L.marker([52.4101095051543, 13.0387169122696]).addTo(map).bindPopup("<b>(44) Ruinenberg Kegel</b><br><a href='http://www.klettern-in-berlin.de/detail/ruine.php3' target='_blank'/>http://www.klettern-in-berlin.de/detail/ruine.php3</a><br><b>A)</b> Siehe Link");
+markers.push(marker);var marker = L.marker([52.4054363793086, 13.0274999141693]).addTo(map).bindPopup("<b>(45) Orangerie Brücke</b><br><a href='http://www.klettern-in-berlin.de/detail/orangerie.php3' target='_blank'/>http://www.klettern-in-berlin.de/detail/orangerie.php3</a><br><b>A)</b> Siehe Link");
+markers.push(marker);var marker = L.marker([52.4026152471934, 13.0531257390976]).addTo(map).bindPopup("<b>(46) Hegelallee Felsen</b><br><a href='http://www.klettern-in-berlin.de/detail/innenstadt.php3' target='_blank'/>http://www.klettern-in-berlin.de/detail/innenstadt.php3</a><br><b>A)</b> Siehe Link");
+markers.push(marker);;
+
+    function markerFunction() {
+        var url = window.location.href;
+        var vec = url.split("#");
+        if (vec.length > 1) {
+            tag = vec[1]
+            var idi = parseInt(tag);
+            console.log(url);
+            console.log(tag);
+            console.log(idi);
+            var coord = Object.assign({}, markers[idi].getLatLng());
+            coord["lat"] += 0.002;
+            map.setView(coord, 16);      // , 16
+            markers[idi].openPopup();
+        }
+
+    }
+
+    window.onload = markerFunction;
+
+    function fprev() {
+        var url = window.location.href;
+        var vec = url.split("#");
+        if (vec.length > 1) {
+            var idi = parseInt(vec[1]);
+            if (idi > 0) {
+                idi = idi - 1;
+            } else {
+                idi = 46;
+            }
+        } else {
+            idi = 46;
+        }
+        window.location.href = vec[0] + '#' + idi;
+        location.reload();
+    }
+
+    function fnext() {
+        var url = window.location.href;
+        var vec = url.split("#");
+        if (vec.length > 1) {
+            var idi = parseInt(vec[1]);
+            if (idi < 46) {
+                idi = idi + 1;
+            } else {
+                idi = 0;
+            }
+        } else {
+            idi = 0
+        }
+        window.location.href = vec[0] + '#' + idi;
+        location.reload();
+    }
+
+    var polygon = L.polyline([
+[52.39586, 13.061183],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.396076, 13.061741],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.396226, 13.057546],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.396527, 13.057026],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.397503, 13.055878],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.397614, 13.055776],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.397882, 13.053673],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.397827, 13.053555],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.39783, 13.053474],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.397823, 13.05363],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.397244, 13.053539],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.393375, 13.059547],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.393457, 13.059466],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.393365, 13.059649],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.394134, 13.061467],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.394125, 13.061065],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.394092, 13.061162],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.393758, 13.061784],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.392822, 13.063313],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.39235, 13.062733],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.392354, 13.062556],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.392174, 13.062583],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.400347, 13.061044],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.400946, 13.073205],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.40309, 13.074181],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.403558, 13.072904],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.401692, 13.072641],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.402939, 13.074562],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.403198, 13.072518],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.404477, 13.044591],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.396049, 13.05003],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.396121, 13.049124],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.393018, 13.044462],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.388248, 13.022323],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.381638, 13.018777],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.375095, 13.006278],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.370123, 13.016165],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.409687, 13.018101],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.407511, 12.976436],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.417053, 13.049741],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.418761, 13.053432],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.4209755535962, 13.0466508865356],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.389705, 13.036829],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.38981, 13.035042],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.4101095051543, 13.0387169122696],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.4054363793086, 13.0274999141693],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+var polygon = L.polyline([
+[52.4026152471934, 13.0531257390976],]).setStyle({color: 'black'}).addTo(map).bindPopup('Route black');
+;
+
+	var popup = L.popup()
+		.setLatLng([52.397587674154316, 13.050653733022815])
+		.setContent("<br><b>Willkommen bei Buildering Spots Potsdam</b><br><br>Das Wort Buildering ist eine Mischung aus Building (engl. Gebäude) und Bouldering (engl. an Felsen klettern) und bezeichnet das Klettern an von Menschen geschaffenen Strukturen.<br><br>Klicke auf einen Marker in der Karte um mehr Informationen und Fotos zu möglichen Klettereien zu bekommen. <br><br>Über die Pfeiltasten oben kannst du auch direkt von einem zum nächsten Spot springen.<br><br>Schwierigkeitsskala:<br><b><span style='color: Gold'>gelb</span> - <span style='color: Blue'>blau</span> - <span style='color: Cyan'>türkis</span> - <span style='color: Red'>rot</span> - <span style='color: DarkMagenta'>lila</span> - <span style='color: Black'>schwarz</span></b><br><br>Bitte immer auf die eigene Sicherheit und andere Personen in der Nähe aufpassen.<br><br>Gutes Klettern und viel Spaß!<br>")
+		.openOn(map);
+
+	function onMapClick(e) {
+        console.log(e.latlng);
+        /*
+		popup
+			.setLatLng(e.latlng)
+			.setContent("<br><b>Willkommen bei Buildering Spots Potsdam</b><br><br>Das Wort Buildering ist eine Mischung aus Building (engl. Gebäude) und Bouldering (engl. an Felsen klettern) und bezeichnet das Klettern an von Menschen geschaffenen Strukturen.<br><br>Klicke auf einen Marker in der Karte um mehr Informationen und Fotos zu möglichen Klettereien zu bekommen. <br><br>Über die Pfeiltasten oben kannst du auch direkt von einem zum nächsten Spot springen.<br><br>Schwierigkeitsskala:<br><b><span style='color: Gold'>gelb</span> - <span style='color: Blue'>blau</span> - <span style='color: Cyan'>türkis</span> - <span style='color: Red'>rot</span> - <span style='color: DarkMagenta'>lila</span> - <span style='color: Black'>schwarz</span></b><br><br>Bitte immer auf die eigene Sicherheit und andere Personen in der Nähe aufpassen.<br><br>Gutes Klettern und viel Spaß!<br>"  + "<br>" + e.latlng.toString())
+			.openOn(map);
+        pintro;
+        */
+	}
+	map.on('click', onMapClick);
+
+	function finfo() {
+    	popup
+        	.setLatLng(map.getCenter())
+        	.setContent("<br><b>Willkommen bei Buildering Spots Potsdam</b><br><br>Das Wort Buildering ist eine Mischung aus Building (engl. Gebäude) und Bouldering (engl. an Felsen klettern) und bezeichnet das Klettern an von Menschen geschaffenen Strukturen.<br><br>Klicke auf einen Marker in der Karte um mehr Informationen und Fotos zu möglichen Klettereien zu bekommen. <br><br>Über die Pfeiltasten oben kannst du auch direkt von einem zum nächsten Spot springen.<br><br>Schwierigkeitsskala:<br><b><span style='color: Gold'>gelb</span> - <span style='color: Blue'>blau</span> - <span style='color: Cyan'>türkis</span> - <span style='color: Red'>rot</span> - <span style='color: DarkMagenta'>lila</span> - <span style='color: Black'>schwarz</span></b><br><br>Bitte immer auf die eigene Sicherheit und andere Personen in der Nähe aufpassen.<br><br>Gutes Klettern und viel Spaß!<br>")
+            .openOn(map);
+        pintro;
+    }
+
+	/*
+    document.getElementById('#small').onmousedown = function (evt) {
+        var smallImage = $(this);
+        var largeReference = smallImage.attr('rel');
+        document.getElementById('#large').attr('src', largeReference);
+    };
+    */
+
+</script>
+
+
+</body>
+</html>
