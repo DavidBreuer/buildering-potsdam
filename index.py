@@ -118,7 +118,7 @@ tinouts["XnumberX"] = XnumberX
 
 txt = replace_text(fin, fout, tinouts)
 
-# %%########################################################################## obsolete: convert svg to png
+# %%########################################################################### obsolete: convert svg to png
 
 inp = "img/"
 out = "out/"
@@ -131,7 +131,7 @@ for file in files[:0]:
     print(cmd)
     os.system(cmd)
 
-# %#%########################################################################## obsolete: generate QR
+# %%########################################################################### obsolete: generate QR
 
 temp = """
 <!DOCTYPE html>
@@ -164,4 +164,4 @@ temp = temp.replace("XbodyX", XbodyX)
 with open('qrcode.html', 'w', encoding="UTF-8") as file:
     file.write(temp)
 
-# %#%########################################################################## end file
+# %%########################################################################### end file
