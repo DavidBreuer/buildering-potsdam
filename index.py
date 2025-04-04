@@ -1,10 +1,8 @@
 # %%########################################################################### prepare functions
 
-import base64
 import os
 import numpy as np
 import pandas as pd
-import qrcode
 
 def replace_text(fin, fout, tinouts):
     with open(fin, 'r') as file :
@@ -14,12 +12,6 @@ def replace_text(fin, fout, tinouts):
     with open(fout, 'w', encoding="utf-8") as file:
         file.write(txt)
     return txt
-
-def replace_img(name):
-    with open(name, "rb") as file:
-        enc = base64.b64encode(file.read())
-    enc = enc.decode('utf-8') 
-    return enc
 
 # %#%########################################################################## generate map
 
@@ -46,7 +38,7 @@ for idg, group in groups:
 tab.dropna(axis=0, subset=["Name"], inplace=True)
 tab["Beschreibung"] = dscs
 
-tab["Pfad"] = range(len(tab))  
+tab["Pfad"] = range(len(tab))
 lent = len(tab)
 
 fin = "temp.html"
@@ -104,7 +96,7 @@ for idi, (idr, row) in enumerate(tab.iterrows()):
     print(idi, num, name)
     hglght = any([row["Name"].startswith(highlight) for highlight in highlights])
     # https://stackoverflow.com/questions/23567203/leaflet-changing-marker-color
-    marker = f"var marker = L.marker([{row['Lat']}, {row['Lon']}]).addTo(map).bindPopup(\"<b>({num}) {row['Name']}</b><br>{img}<br>{row['Beschreibung']}\");\n" 
+    marker = f"var marker = L.marker([{row['Lat']}, {row['Lon']}]).addTo(map).bindPopup(\"<b>({num}) {row['Name']}</b><br>{img}<br>{row['Beschreibung']}\");\n"
     if hglght:
         print("+")
         marker += "marker._icon.classList.add('huechange');"
@@ -117,51 +109,5 @@ XnumberX = str(lent - 1)
 tinouts["XnumberX"] = XnumberX
 
 txt = replace_text(fin, fout, tinouts)
-
-# %%########################################################################### obsolete: convert svg to png
-
-inp = "img/"
-out = "out/"
-
-ink = 'inkscape --export-area-page --export-dpi 15 --export-png "%s" "%s"'
-
-files = [file for file in os.listdir(inp) if ".svg" in file]  
-for file in files[:0]:
-    cmd = ink % (out+file.replace(".svg", ".png"), inp+file)
-    print(cmd)
-    os.system(cmd)
-
-# %%########################################################################### obsolete: generate QR
-
-temp = """
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Buildering Spots Potsdam</title>
-	<meta charset="UTF-8" />
-</head>
-<body>
-XbodyX
-</body>
-</html>
-"""
-
-base = "https://davidbreuer.github.io/buildering-potsdam/#"
-
-XbodyX = ''
-for idi, (idr, row) in enumerate(tab.iloc[:0].iterrows()):
-    num = str(idi).zfill(2)
-    url = base + str(idi)
-    img = qrcode.make(url)
-    imn = "qr/%s.png" % row['Kurzname']
-    img.save(imn)
-    enc = replace_img(imn)
-    XbodyX += "<h3>(%s) %s</h3>\n" % (num, row['Name'])
-    XbodyX += "<img src='data:image/png;base64,%s'/>" % enc
-
-temp = temp.replace("XbodyX", XbodyX)
-
-with open('qrcode.html', 'w', encoding="UTF-8") as file:
-    file.write(temp)
 
 # %%########################################################################### end file
