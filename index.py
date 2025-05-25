@@ -15,7 +15,7 @@ def replace_text(fin, fout, tinouts):
 
 # %#%########################################################################## generate map
 
-tab = pd.read_excel("index.xlsx")
+tab = pd.read_csv("index.csv", sep=",")
 
 fab = dict()
 fab['1'] = '1 gelb'
