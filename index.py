@@ -15,7 +15,9 @@ def replace_text(fin, fout, tinouts):
 
 # %#%########################################################################## generate map
 
-tab = pd.read_csv("index.csv", sep=",")
+tao = pd.read_csv("index.csv", sep=",")
+
+tab = tao.copy()
 
 fab = dict()
 fab['1'] = '1 gelb'
@@ -77,12 +79,14 @@ tinouts["XcenterX"] = XcenterX
 highlights = [] # ["Kanal", "Lustgarten", "Lange"]
 
 XmarkersX = ""
+lenp = 0
 for idi, (idr, row) in enumerate(tab.iterrows()):
     num = str(idi).zfill(2)
     nams = "img/%s.svg" % row["Kurzname"]
     namt = "img/%s.txt" % row["Kurzname"]
     namb = "img/aaa_berge.svg"
     if os.path.isfile(nams):
+        lenp += 1
         name = nams
         img = f"<img id='small' src='{name}' width='200'/>"
     elif os.path.isfile(namt):
@@ -109,5 +113,10 @@ XnumberX = str(lent - 1)
 tinouts["XnumberX"] = XnumberX
 
 txt = replace_text(fin, fout, tinouts)
+
+print('')
+print('Spots', '\t=', len(tab))
+print('Photos', '\t=', lenp)
+print('Routes', '\t=', len(tao))
 
 # %%########################################################################### end file
