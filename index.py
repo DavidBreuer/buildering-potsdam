@@ -12,6 +12,9 @@ def replace_text(fin, fout, tinouts):
     with open(fout, 'w', encoding="utf-8") as file:
         file.write(txt)
     return txt
+    
+# downscale images
+# mogrify -resize 30% *
 
 # %#%########################################################################## generate map
 
@@ -97,7 +100,7 @@ for idi, (idr, row) in enumerate(tab.iterrows()):
     else:
         name = namb
         img = f"<img id='small' src='{name}' width='200'/>"
-    print(idi, num, name)
+    print(num, row["Kurzname"].ljust(25), name)
     hglght = any([row["Name"].startswith(highlight) for highlight in highlights])
     # https://stackoverflow.com/questions/23567203/leaflet-changing-marker-color
     marker = f"var marker = L.marker([{row['Lat']}, {row['Lon']}]).addTo(map).bindPopup(\"<b>({num}) {row['Name']}</b><br>{img}<br>{row['Beschreibung']}\");\n"

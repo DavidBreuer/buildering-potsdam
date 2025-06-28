@@ -61,6 +61,7 @@ Bassi-Haus,bassi_haus,A) Ums Haus (beide Richtungen),3,,,,52.40035,13.06104
 Schiffbauergasse Humboldt,schiff_humboldt,A) Vom Gehweg unten mit Wallrun hoch zum Wartungsgang unter der Brücke (auf die andere Havelseite und zurück),5,,,,52.40095,13.07321
 Schiffbauergasse Brücke ,schiff_bruecke,A) Vom Boden bis unten die Brücken-Brüstung,5,,Lukas,,52.40106,13.07333
 ,,B) Wie A und bis auf die Brücke (nur mit Seilsicherung probieren),6,,Lukas,,,
+Schiffbauergasse Parkhaus ,schiff_parkhaus,A) In Verschneidung hoch und hoch-manteln,4,,,,52.4033321117971,13.074079896884
 Schiffbauergasse Offizze,schiff_offizze,A) Am Backsteinhaus zwischen Waschhaus und Fabrik entlang bis zur Ecke (beide Richtungen),3,,,,52.40309,13.07418
 ,,B) Wie A und weiter bis zur Treppenkonstruktion,4,,Stevie,Stevie,,
 Schiffbauergasse Reithalle,schiff_reithalle,A) Traverse an der Wand entlang (beide Richtungen),3,,,,52.40356,13.0729
@@ -111,10 +112,25 @@ Golm Uni Kletteradler,golm_adler,A) Im überhängenden rechten Flügel hoch und 
 Buga-Park Bouldersichel,buga_sichel,A) Vom Kies im flachen Bereich der Sichel nach oben raus (z.B. weit rechts oder durchs Fensterloch),3,,,,52.41705,13.04974
 ,,B) Vom Kies im höheren Bereich der Sichel nach oben raus (mit Spotten/Hilfestellung),4,,,,,
 ,,C) Traverse um die Sichel (beide Richtungen),5,,,,,
-Buga-Park Rutschenturm,buga_rutschen,"A) Von der Treffe starten, unterm Netz entlang bis zu den Kletterrouten",4,,,,52.41876,13.05343
-,,B) Kletterrouten mit selbst-definierten Griffen und Tritten bis Absprunghöhe,4,,,,,
-Buga-Park Café,buga_cafe,A) Traverse,3,,,,52.42098,13.04665
-,,B) Nach oben,5,,Oli,David,,
+Buga-Park Rutschenturm Seite,buga_rutschen_seite,"A) Von der Treffe starten, unterm Netz entlang bis zu den Kletterrouten",3,,,,52.418799727556,13.0533419066541
+,,B) Kletterrouten mit selbst-definierten Griffen und Tritten bis Absprunghöhe,2,,,,,
+Buga-Park Rutschenturm Vorne,buga_rutschen_vorne,"A) Unterm Netz, über Treppe und Rutschen ohne Bodenberührung",4,,,,52.4187338849686,13.0534022563569
+Buga-Park Rutschenturm Innen,buga_rutschen_innen,A) Säule runter,3,,,,52.4188111784308,13.0534753465526
+,,B) Säule hoch,4,,,,,
+,,C) Netz hoch und an Treppe entlang hoch,4,,,,,
+Buga-Park Rutschenturm Oben,buga_rutschen_oben,A) Im Turm vom rechten Rutscheneingang an der Wand entlang über Abgrund und Treppe runter bis zum Ende der Wandlöcher,4,,,,52.4187776437178,13.0534820520751
+Buga-Park Skate-Park Haus,buga_skate_haus,A) Aufs Häuschen und die Brücke darüber hoch,4,,,,52.4192988861718,13.0450202175464
+,,"B) Aufs Häuschen, nur mit Türscharnieren",5,,,,,
+Buga-Park Skate-Park Brücke,buga_skate_bruecke,A) Brückenpfeiler und auf Brücke hoch,5,,,,52.4192014603222,13.0451367619545
+Buga-Park Skate-Park Halfpipe,buga_skate_halfpipe,A) Unter Halfpipe-Plattform von einer Seite auf die andere ohne Bodenberührung,4,,,,52.4191101616891,13.0451528370453
+Buga-Park Skate-Park Wand,buga_skate_wand,A) In weniger senkrechtem Wand-Riss nach oben schieben und auf Mauer aussteeigen,4,,,,52.4189931275912,13.0455557190078
+,,B) In steilerem Wand-Riss nach oben schieben und auf Mauer aussteeigen,5,,,,,
+Buga-Park Biosphäre,buga_biosphaere,A) Schräge rechts nach oben,2,,,,52.41888058469,13.0492327717496
+,,B) Schräge mittig bis oben,4,,,,,
+,,C) Aus Höhle über Tür nach oben über Geländer (ohne Türklinke!),5,,,,,
+Buga-Park Café,buga_cafe,A) Traverse,3,,,,52.4186571892586,13.0443362904022
+,,B) Nach oben,4,,Oli,Samuel,,
+,,C) Nach oben in Ecke,5,,Oli,David,,
 Westufer Bogen,westufer_bogen,A) Um das sanft abfallende Bogenende horizontal herum klettern (beide Richtungen),3,,,,52.38971,13.03683
 ,,B) Um das steil abfallende Bogenende horizontal herum klettern (beide Richtungen),4,,,,,
 ,,C) Den Bogen von einem zum anderen Ende entlang (oben drauf oder unten drunter),4,,,,,
